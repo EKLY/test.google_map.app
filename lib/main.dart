@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:ui' as ui;
-import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -112,77 +112,20 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 Future<BitmapDescriptor> iconMarker() async {
-  bool isNoNumber = false;
-  Color _statusColor = Colors.red;
-
-  var wMarker = 300.0;
-  var wMarker_2 = wMarker / 2;
-  var wMarker_4 = wMarker / 4;
-  var wMarker_6 = wMarker / 6;
-  var wMarker_8 = wMarker / 8;
-  var wMarker_10 = wMarker / 10;
-  var wBorderwidth = wMarker / 15;
-  var wBorderwidth_2 = wBorderwidth / 2;
-  var hMarker = wMarker + wMarker_2 + (isNoNumber ? 0 : wMarker_4);
-
-  Paint sBorderFill = Paint()
-    ..color = _statusColor
-    ..style = PaintingStyle.fill;
-  Paint sBorderStroke = Paint()
-    ..color = _statusColor
-    ..style = PaintingStyle.stroke
-    ..strokeWidth = wBorderwidth;
-
-  Paint sCircleFill = Paint()..color = Colors.white;
+  var sMarker = 300.0;
 
   ui.PictureRecorder recorder = ui.PictureRecorder();
   Canvas canvas = Canvas(recorder);
 
   canvas.drawRect(
-      Rect.fromLTWH(0, 0, wMarker, hMarker), Paint()..color = Colors.orange);
-
-  // ----- CIRCLE
-
-  final Offset circleCenter =
-      Offset(wMarker_2, isNoNumber ? wMarker_2 * 1.8 : wMarker + wMarker_8);
-  final double circleRadius = wMarker_2 - wBorderwidth;
-
-  var mArrow = Path()
-    ..moveTo(
-        wMarker_2 - wMarker_4, wMarker + (isNoNumber ? wMarker_8 : wMarker_4))
-    ..lineTo(
-        wMarker_2 + wMarker_4, wMarker + (isNoNumber ? wMarker_8 : wMarker_4))
-    ..lineTo(wMarker_2, hMarker)
-    ..close();
-  canvas.drawPath(mArrow, sBorderFill);
-
-  canvas.drawCircle(circleCenter, wMarker_2, sBorderFill);
-  canvas.drawCircle(circleCenter, wMarker_2 - wBorderwidth, sCircleFill);
+      Rect.fromLTWH(0, 0, sMarker, sMarker), Paint()..color = Colors.orange);
 
   // ----- ICON / IMG
 
-  var number = "สวัสดี";
-  var numberHeight = wMarker / 3;
-
-  canvas.drawRect(
-      Offset(0, wMarker_2) & ui.Size(wMarker, numberHeight),
-      Paint()
-        ..color = Colors.yellow
-        ..style = PaintingStyle.fill);
-
-  canvas.drawRect(
-      Offset(0, wMarker_2) & ui.Size(wMarker, numberHeight),
-      Paint()
-        ..color = Colors.red
-        ..strokeWidth = 5
-        ..style = PaintingStyle.stroke);
+  var number = "WVUYLJ";
 
   TextSpan title = TextSpan(
-    style: TextStyle(
-        color: Colors.red,
-        backgroundColor: Colors.transparent,
-        fontSize: numberHeight * 0.55, // ขนาดของฟอนต์สัมพันธ์กับ numberHeight
-        fontWeight: FontWeight.bold),
+    style: TextStyle(color: Colors.black, fontSize: 50),
     text: number,
   );
 
@@ -192,16 +135,15 @@ Future<BitmapDescriptor> iconMarker() async {
       textDirection: TextDirection.ltr);
   tp.layout();
 
-  final double textX = (wMarker - tp.width) / 2;
-  final double textY = wMarker_2 +
-      (numberHeight - tp.height) / 2; // ทำให้ข้อความอยู่ตรงกลางแนวตั้ง
+  final double textX = (sMarker - tp.width) / 2;
+  final double textY = sMarker / 2;
 
   tp.paint(canvas, Offset(textX, textY));
 
   // ----- ARROW
 
   ui.Picture p = recorder.endRecording();
-  ByteData? pngBytes = await (await p.toImage(wMarker.toInt(), hMarker.toInt()))
+  ByteData? pngBytes = await (await p.toImage(sMarker.toInt(), sMarker.toInt()))
       .toByteData(format: ui.ImageByteFormat.png);
   Uint8List data = Uint8List.view(pngBytes!.buffer);
 
