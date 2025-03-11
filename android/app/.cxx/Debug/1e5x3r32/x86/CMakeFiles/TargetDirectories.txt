@@ -1,0 +1,2 @@
+D:/project/test.google_map.app/android/app/.cxx/Debug/1e5x3r32/x86/CMakeFiles/edit_cache.dir
+D:/project/test.google_map.app/android/app/.cxx/Debug/1e5x3r32/x86/CMakeFiles/rebuild_cache.dir
